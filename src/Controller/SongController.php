@@ -26,8 +26,8 @@ class SongController extends AbstractController
     #[Route('/', name: 'app_song_index', methods: ['GET'])]
     public function index(Request $request, PaginatorInterface $paginator, SongRepository $songRepository): Response
     {
+        // Accedir a tots els àlbums (necessita propietat i constructor per accedir al entityManager)
         $albums = $this->entityManager->getRepository(Album::class)->findAll();
-
 
         /* Paginador i cercador */
         $q = $request->query->get('q', '');
