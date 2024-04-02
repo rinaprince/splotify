@@ -14,15 +14,17 @@ class Song implements \JsonSerializable
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Assert\Type('integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column]
     #[Assert\Range(
         notInRangeMessage: 'Duration must be between {{ min }} and {{ max }}',
-        min: 0,
+        min: 20,
         max: 600,
     )]
     #[Assert\Type('integer')]
