@@ -13,6 +13,15 @@
         </form>
     </div>
 
+    <div>
+        <label for="album">Selecciona un àlbum:</label>
+        <select name="album" id="album">
+            {% for album in albums %}
+                <option value="{{ album.id }}">{{ album.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
     <table class="table">
         <thead>
             <tr>

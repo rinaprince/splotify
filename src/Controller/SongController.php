@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Album;
 use App\Entity\Song;
 use App\Form\SongType;
 use App\Repository\SongRepository;
@@ -15,9 +16,20 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin')]
 class SongController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/', name: 'app_song_index', methods: ['GET'])]
     public function index(Request $request, PaginatorInterface $paginator, SongRepository $songRepository): Response
     {
+        $albums = $this->entityManager->getRepository(Album::class)->findAll();
+
+
+        /* Paginador i cercador */
         $q = $request->query->get('q', '');
 
         if (empty($q))
@@ -35,6 +47,7 @@ class SongController extends AbstractController
             'q' => $q,
             'pagination' => $pagination,
             'songs' => $pagination->getItems(),
+            'albums' => $albums,
         ]);
     }
 
