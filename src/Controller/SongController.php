@@ -6,19 +6,35 @@ use App\Entity\Song;
 use App\Form\SongType;
 use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/song')]
+#[Route('/admin')]
 class SongController extends AbstractController
 {
     #[Route('/', name: 'app_song_index', methods: ['GET'])]
-    public function index(SongRepository $songRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator, SongRepository $songRepository): Response
     {
+        $q = $request->query->get('q', '');
+
+        if (empty($q))
+            $query = $songRepository->findAllQuery();
+        else
+            $query = $songRepository->findByTextQuery($q);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            15
+        );
+
         return $this->render('song/index.html.twig', [
-            'songs' => $songRepository->findAll(),
+            'q' => $q,
+            'pagination' => $pagination,
+            'songs' => $pagination->getItems(),
         ]);
     }
 
@@ -68,7 +84,7 @@ class SongController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_song_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_song_delete', methods: ['POST'])]
     public function delete(Request $request, Song $song, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$song->getId(), $request->getPayload()->get('_token'))) {

@@ -1,17 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Song index{% endblock %}
+{% block title %}Cançons{% endblock %}
 
 {% block body %}
-    <h1>Song index</h1>
+    <h1>Llista de cançons</h1>
+
+    <div>
+        <form method="get" role="search" class="d-flex">
+            <input type="search" class="form-control w-25" name="q"
+                   aria-label="Search">
+            <button type="submit" class="btn btn-outline-dark">Search</button>
+        </form>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Duration</th>
-                <th>actions</th>
+                <th>Titol</th>
+                <th>Duració</th>
+                <th>Accions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +29,9 @@
                 <td>{{ song.title }}</td>
                 <td>{{ song.duration }}</td>
                 <td>
-                    <a href="{{ path('app_song_show', {'id': song.id}) }}">show</a>
-                    <a href="{{ path('app_song_edit', {'id': song.id}) }}">edit</a>
+                    <!--<a href="{{ path('app_song_show', {'id': song.id}) }}">show</a>
+                    <a href="{{ path('app_song_edit', {'id': song.id}) }}">edit</a>-->
+                    {{ include('song/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -33,5 +42,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_song_new') }}">Create new</a>
+    <!--<a href="{{ path('app_song_new') }}">Create new</a>-->
+
+    <div class="navigation d-flex justify-content-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 {% endblock %}
