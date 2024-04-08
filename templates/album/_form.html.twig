@@ -1,4 +1,5 @@
 {{ form_start(form) }}
+{{ form_row(form.releasedAt, {'attr': {'type': 'date', 'value': form.vars.value.releasedAt|date('Y-m-d')}}) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

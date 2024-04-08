@@ -1,18 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Album index{% endblock %}
+{% block title %}Albums{% endblock %}
 
 {% block body %}
-    <h1>Album index</h1>
+    <h1>Llista d'àlbums</h1>
+
+    <div>
+        <label for="album">Selecciona una banda:</label>
+        <select name="band" id="band">
+            {% for band in bands %}
+                <option value="{{ band.id }}">{{ band.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>ReleasedAt</th>
+                <th>Titol</th>
+                <th>Publicat</th>
                 <th>Cover</th>
-                <th>actions</th>
+                <th>accions</th>
             </tr>
         </thead>
         <tbody>
@@ -20,20 +29,26 @@
             <tr>
                 <td>{{ album.id }}</td>
                 <td>{{ album.title }}</td>
-                <td>{{ album.releasedAt ? album.releasedAt|date('Y-m-d') : '' }}</td>
+                <td>
+                    {% if album.releasedAt %}
+                        <input type="date" value="{{ album.releasedAt|date('Y-m-d') }}">
+                    {% else %}
+                        <input type="date" value="">
+                    {% endif %}
+                </td>
                 <td>{{ album.cover }}</td>
                 <td>
-                    <a href="{{ path('app_album_show', {'id': album.id}) }}">show</a>
-                    <a href="{{ path('app_album_edit', {'id': album.id}) }}">edit</a>
+                    <a href="{{ path('app_album_show', {'id': album.id}) }}">Mostrar</a>
+                    <a href="{{ path('app_album_edit', {'id': album.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">No s'ha trobat res</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_album_new') }}">Create new</a>
+    <a href="{{ path('app_album_new') }}">Crear àlbum</a>
 {% endblock %}

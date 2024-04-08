@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
 class Album implements \JsonSerializable
@@ -14,15 +15,25 @@ class Album implements \JsonSerializable
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Assert\Type('integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\DateTime]
+    #[Assert\NotBlank]
+    #[Assert\Type("\DateTimeInterface")]
+    #[Assert\NotNull]
     private ?\DateTimeInterface $releasedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Image(
+        maxSize: "2M",
+    )]
+    #[Assert\NotBlank]
     private ?string $cover = null;
 
      #[ORM\ManyToOne(inversedBy: 'albums')]

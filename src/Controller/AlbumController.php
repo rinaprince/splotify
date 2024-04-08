@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Album;
+use App\Entity\Band;
 use App\Form\AlbumType;
 use App\Repository\AlbumRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,11 +15,21 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/album')]
 class AlbumController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/', name: 'app_album_index', methods: ['GET'])]
     public function index(AlbumRepository $albumRepository): Response
     {
+        $bands = $this->entityManager->getRepository(Band::class)->findAll();
+
         return $this->render('album/index.html.twig', [
             'albums' => $albumRepository->findAll(),
+            'bands' => $bands,
         ]);
     }
 
