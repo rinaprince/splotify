@@ -45,6 +45,9 @@ class Album implements \JsonSerializable
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'likes')]
     private Collection $users;
 
+    #[Assert\Type('integer')]
+    private ?int $likes = 0;
+
     public function __construct()
     {
         $this->songs = new ArrayCollection();
@@ -112,6 +115,11 @@ class Album implements \JsonSerializable
         return $this;
     }
 
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
     /**
      * @return Collection<int, Song>
      */
@@ -165,6 +173,20 @@ class Album implements \JsonSerializable
         if ($this->users->removeElement($user)) {
             $user->removeLike($this);
         }
+
+        return $this;
+    }
+
+    public function incrementLikes(): self
+    {
+        $this->likes++;
+
+        return $this;
+    }
+
+    public function decrementLikes(): self
+    {
+        $this->likes--;
 
         return $this;
     }

@@ -21,7 +21,7 @@
                 <th>Titol</th>
                 <th>Publicat</th>
                 <th>Cover</th>
-                <th>accions</th>
+                <!--<th>accions</th>-->
             </tr>
         </thead>
         <tbody>
@@ -37,10 +37,10 @@
                     {% endif %}
                 </td>
                 <td>{{ album.cover }}</td>
-                <td>
+                <!--<td>
                     <a href="{{ path('app_album_show', {'id': album.id}) }}">Mostrar</a>
                     <a href="{{ path('app_album_edit', {'id': album.id}) }}">Editar</a>
-                </td>
+                </td>-->
             </tr>
         {% else %}
             <tr>
