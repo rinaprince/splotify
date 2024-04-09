@@ -42,6 +42,7 @@ class HomeController extends AbstractController
     #[Route('/like/{id}', name: 'like_album')]
     public function like($id): Response
     {
+
         $album = $this->entityManager->getRepository(Album::class)->find($id);
 
         if (!$album) {

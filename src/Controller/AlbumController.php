@@ -25,6 +25,9 @@ class AlbumController extends AbstractController
     #[Route('/', name: 'app_album_index', methods: ['GET'])]
     public function index(AlbumRepository $albumRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN',
+            null, 'Accés restringit, soles adminis');
+
         $bands = $this->entityManager->getRepository(Band::class)->findAll();
 
         return $this->render('album/index.html.twig', [
@@ -36,6 +39,9 @@ class AlbumController extends AbstractController
     #[Route('/new', name: 'app_album_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN',
+            null, 'Accés restringit, soles adminis');
+
         $album = new Album();
         $form = $this->createForm(AlbumType::class, $album);
         $form->handleRequest($request);
