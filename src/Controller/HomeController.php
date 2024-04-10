@@ -17,7 +17,7 @@ class HomeController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(): Response
     {
         $albums = $this->entityManager->getRepository(Album::class)->findBy([], ['releasedAt' => 'DESC']);
@@ -42,18 +42,13 @@ class HomeController extends AbstractController
     #[Route('/like/{id}', name: 'like_album')]
     public function like($id): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Només un user noraml pot entrar.');
 
         $album = $this->entityManager->getRepository(Album::class)->find($id);
 
         if (!$album) {
             throw $this->createNotFoundException("No s'ha trobat l'àlbum amb id:".$id);
         }
-
-        // Incrementar el contador de likes
-        $album->incrementLikes();
-
-        // Guardar en la BDA
-        $this->entityManager->flush();
 
         // Redirigir a la home
         return $this->redirectToRoute('app_home');

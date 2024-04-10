@@ -4,14 +4,17 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        users_provider:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: users_provider
             form_login:
                 login_path: app_login
                 check_path: app_login
@@ -30,17 +33,14 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN: [ROLE_ADMIN]
-        ROLE_USER: [ROLE_USER]
+        ROLE_USER: []
 
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/home, roles: ROLE_USER }
+        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/login, roles: ROLE_USER }
         - { path: ^/details, roles: ROLE_USER }
-        - { path: ^/home, roles: ROLE_ADMIN }
-        - { path: ^/details, roles: ROLE_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/album, roles: ROLE_ADMIN }
+        - { path: ^/album/new, roles: ROLE_ADMIN }
 
 when@test:
     security:

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Splotify</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        {% if app.user %}
+            <li>Bienvingut, {{ user.username }} | <a href="{{ path('app_logout') }}">Tancar sessió</a></li>
+        {% else %}
+            <li><a href="{{ path('app_login') }}">Iniciar sessió</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% block body %}
+ <h1>Navegació</h1>
+
+    <a href="{{ path('app_home') }}">Pàgina principal</a>
+
+    <a href="{{ path('app_album') }}">Gestió d'àlbums</a>
+
+    <a href="{{ path('app_songs') }}">Pàgina principal</a>
+
+    <li><a href="{{ path('app_album_details') }}">Pàgina de detall</a></li>
+
+{% endblock %}
+
+</body>
+</html>
