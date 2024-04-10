@@ -36,8 +36,8 @@ security:
         ROLE_USER: []
 
     access_control:
-        - { path: ^/, roles: ROLE_USER }
-        - { path: ^/login, roles: ROLE_USER }
+        #- { path: ^/, roles: ROLE_USER }
+        #- { path: ^/login, roles: ROLE_USER }
         - { path: ^/details, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/album/new, roles: ROLE_ADMIN }

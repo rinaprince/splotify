@@ -18,7 +18,7 @@
             <strong>Nº de cançons:</strong> {{ album.songs|length }}<br>
             <a href="{{ path('album_details', {'id': album.id}) }}">Detalls</a>
             <form action="{{ path('like_album', {'id': album.id}) }}" method="post" style="display:inline;">
-                <button type="submit">Like</button> {{ album.likes }}<br>
+                <button type="submit">Like</button><br>
             </form>
         {% endfor %}
     </ol>

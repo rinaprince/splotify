@@ -29,7 +29,7 @@ class AlbumController extends AbstractController
 
         $bands = $this->entityManager->getRepository(Band::class)->findAll();
 
-        return $this->render('album/index.html.twig', [
+        return $this->render('album/_header.html.twig', [
             'albums' => $albumRepository->findAll(),
             'bands' => $bands,
         ]);

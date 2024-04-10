@@ -22,7 +22,7 @@ class HomeController extends AbstractController
     {
         $albums = $this->entityManager->getRepository(Album::class)->findBy([], ['releasedAt' => 'DESC']);
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/_header.html.twig', [
             'controller_name' => 'HomeController',
             'albums' => $albums,
         ]);
@@ -37,20 +37,5 @@ class HomeController extends AbstractController
         return $this->render('home/album_details.html.twig', [
             'album' => $album,
         ]);
-    }
-
-    #[Route('/like/{id}', name: 'like_album')]
-    public function like($id): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Només un user noraml pot entrar.');
-
-        $album = $this->entityManager->getRepository(Album::class)->find($id);
-
-        if (!$album) {
-            throw $this->createNotFoundException("No s'ha trobat l'àlbum amb id:".$id);
-        }
-
-        // Redirigir a la home
-        return $this->redirectToRoute('app_home');
     }
 }
