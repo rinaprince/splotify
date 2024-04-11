@@ -12,14 +12,19 @@
     <h1>Pàgina principal</h1>
 
     <ol>
-        {% for album in albums %}
+        {% for album in albumsArray %}
             <strong>Titol:</strong> {{ album.title }}<br>
             <strong>Portada:</strong> <img src="{{ album.cover }}" alt="Portada del àlbum"><br>
             <strong>Nº de cançons:</strong> {{ album.songs|length }}<br>
             <a href="{{ path('album_details', {'id': album.id}) }}">Detalls</a>
+
+            likes: {{ album.users | length }}
+
+            {% if album not in app.user.likes  %}
             <form action="{{ path('like_album', {'id': album.id}) }}" method="post" style="display:inline;">
                 <button type="submit">Like</button><br>
             </form>
+            {% endif %}
         {% endfor %}
     </ol>
 </div>

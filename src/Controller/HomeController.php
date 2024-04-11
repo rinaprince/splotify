@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Album;
+use App\Repository\AlbumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,23 +19,22 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(AlbumRepository $albumRepository): Response
     {
-        $albums = $this->entityManager->getRepository(Album::class)->findBy([], ['releasedAt' => 'DESC']);
+        $albums = $albumRepository->findBy([], ['releasedAt' => 'DESC']);
 
-        return $this->render('home/_header.html.twig', [
-            'controller_name' => 'HomeController',
-            'albums' => $albums,
+        return $this->render('home/index.html.twig', [
+            'albumsArray' => $albums,
         ]);
     }
 
     #[Route('/album/{id}', name: 'album_details')]
-    public function show($id): Response
+    public function show(Album $album): Response
     {
         // Mostrar els detalls de l'album
-        $album = $this->entityManager->getRepository(Album::class)->find($id);
+       // $album = $this->entityManager->getRepository(Album::class)->find($id);
 
-        return $this->render('home/album_details.html.twig', [
+        return $this->render('album/show.html.twig', [
             'album' => $album,
         ]);
     }

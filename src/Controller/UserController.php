@@ -29,8 +29,6 @@ class UserController extends AbstractController
     #[Route('/like/{id}', name: 'like_album')]
     public function like(int $id, Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Només un user normal pot donar like.');
-
         $album = $this->entityManager->getRepository(Album::class)->find($id);
 
         if (!$album) {
@@ -41,6 +39,7 @@ class UserController extends AbstractController
 
         $user->addLike($album);
 
+        $this->entityManager->persist($user);
         $this->entityManager->flush();
 
         return $this->redirectToRoute('app_home');

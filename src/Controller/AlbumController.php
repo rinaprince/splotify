@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/album')]
+#[Route('/admin/albums')]
 class AlbumController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
