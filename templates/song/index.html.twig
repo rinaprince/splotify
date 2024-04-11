@@ -3,7 +3,14 @@
 {% block title %}Cançons{% endblock %}
 
 {% block body %}
-    <h1>Llista de cançons</h1>
+
+    <div class="container d-flex justify-content-center py-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="fs-5 border-3 border-bottom border-info-subtle">Llista de cançons</h2>
+            </div>
+        </div>
+    </div>
 
     <div>
         <form method="get" role="search" class="d-flex">
@@ -24,12 +31,12 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titol</th>
-                <th>Duració</th>
-                <th>Accions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Titol</th>
+            <th>Duració</th>
+            <th>Accions</th>
+        </tr>
         </thead>
         <tbody>
         {% for song in songs %}
