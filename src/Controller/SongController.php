@@ -46,7 +46,7 @@ class SongController extends AbstractController
             15
         );
 
-        return $this->render('song/_header.html.twig', [
+        return $this->render('song/index.html.twig', [
             'q' => $q,
             'pagination' => $pagination,
             'songs' => $pagination->getItems(),
