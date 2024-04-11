@@ -3,29 +3,34 @@
 {% block title %}Splotify{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Pàgina principal</h1>
+    <div class="container d-flex justify-content-center py-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="fs-5 border-3 border-bottom border-info-subtle">Pàgina principal</h2>
+            </div>
+        </div>
+    </div>
 
-    <ol>
-        {% for album in albumsArray %}
-            <strong>Titol:</strong> {{ album.title }}<br>
-            <strong>Portada:</strong> <img src="{{ album.cover }}" alt="Portada del àlbum"><br>
-            <strong>Nº de cançons:</strong> {{ album.songs|length }}<br>
-            <a href="{{ path('album_details', {'id': album.id}) }}">Detalls</a>
-
-            likes: {{ album.users | length }}
-
-            {% if album not in app.user.likes  %}
-            <form action="{{ path('like_album', {'id': album.id}) }}" method="post" style="display:inline;">
-                <button type="submit">Like</button><br>
-            </form>
-            {% endif %}
-        {% endfor %}
-    </ol>
-</div>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="row">
+            <div class="col-12">
+                <ol>
+                    {% for album in albums %}
+                        <p><strong>Titol:</strong> {{ album.title }}</p><br>
+                        <p><strong>Portada:</strong> <img src="{{ album.cover }}" alt="Portada del àlbum"></p><br>
+                        <p><strong>Nº de cançons:</strong> {{ album.songs|length }}</p><br>
+                        <button class="btn btn-primary mb-3"><a href="{{ path('album_details', {'id': album.id}) }}" class="link-underline link-underline-opacity-0 text-white">Detalls</a></button>
+                        {% if album not in app.user.likes %}
+                            <form action="{{ path('like_album', {'id': album.id}) }}" method="post">
+                                <button type="submit" class="btn btn-success me-2 mb-3 text-white">Like</button>
+                                <p class="mb-3"><strong>Likes: </strong> {{ album.users | length }}</p>
+                            </form>
+                        {% endif %}
+                        <p class="border-3 border-bottom border-info-subtle mb-5"></p>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
 {% endblock %}
