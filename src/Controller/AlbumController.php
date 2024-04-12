@@ -53,6 +53,7 @@ class AlbumController extends AbstractController
 
         return $this->render('album/new.html.twig', [
             'album' => $album,
+            'form' => $form,
         ]);
     }
 

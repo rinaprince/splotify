@@ -1,5 +1,23 @@
 {{ form_start(form) }}
-{{ form_row(form.releasedAt, {'attr': {'type': 'date', 'value': form.vars.value.releasedAt|date('Y-m-d')}}) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="container-xl container-fluid bg-white">
+    <div class="row">
+        <div class="col-4">
+            {{ form_row(form.releasedAt, {'label': 'Data de llançament:','attr': {'type': 'date', 'value': form.vars.value.releasedAt|date('Y-m-d')}}) }}
+        </div>
+        <div class="col-4">
+            {{ form_row(form.title, {'label': 'Titol'}) }}
+        </div>
+        <div class="col-4">
+            {{ form_row(form.cover, {'label': 'Portada'}) }}
+        </div>
+        <div class="col-4">
+            {{ form_row(form.band, {'label': 'Banda'}) }}
+        </div>
+        <div class="col-4">
+            {{ form_row(form.users, {'label': 'Usuaris'}) }}
+        </div>
+    </div>
+</div>
+{{ form_widget(form) }}
+<button class="btn">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}
