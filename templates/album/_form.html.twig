@@ -1,23 +1,23 @@
 {{ form_start(form) }}
-<div class="container-xl container-fluid bg-white">
+<div class="container bg-white">
     <div class="row">
-        <div class="col-4">
-            {{ form_row(form.releasedAt, {'label': 'Data de llançament:','attr': {'type': 'date', 'value': form.vars.value.releasedAt|date('Y-m-d')}}) }}
+        <div class="col-3">
+            {{ form_row(form.title, {'label': 'Titol', 'attr': {'class': 'form-control'}}) }}
         </div>
-        <div class="col-4">
-            {{ form_row(form.title, {'label': 'Titol'}) }}
+        <div class="col-3">
+            {{ form_row(form.releasedAt, {'label': 'Data de llançament:','attr': {'class': 'form-control','type': 'date', 'value': form.vars.value.releasedAt|date('Y-m-d')}}) }}
         </div>
-        <div class="col-4">
-            {{ form_row(form.cover, {'label': 'Portada'}) }}
+        <div class="col-2">
+            {{ form_row(form.cover, {'label': 'Portada', 'attr': {'class': 'form-control'}}) }}
         </div>
-        <div class="col-4">
-            {{ form_row(form.band, {'label': 'Banda'}) }}
+        <div class="col-1">
+            {{ form_row(form.band, {'label': 'Banda', 'attr': {'class': 'form-control'}}) }}
         </div>
-        <div class="col-4">
-            {{ form_row(form.users, {'label': 'Usuaris'}) }}
+        <div class="col-1">
+            {{ form_row(form.users, {'label': 'Usuaris', 'attr': {'class': 'form-control', 'multiple aria-label': 'example'}}) }}
         </div>
     </div>
 </div>
 {{ form_widget(form) }}
-<button class="btn">{{ button_label|default('Guardar') }}</button>
+<button class="btn btn-outline-success ms-5">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_song_delete', {'id': song.id}) }}" onsubmit="return confirm('Estas segur que vols esborrar aquesta cançò?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ song.id) }}">
-    <button class="btn">Esborrar</button>
+    <button class="btn btn-outline-danger">Esborrar</button>
 </form>
