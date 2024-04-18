@@ -8,13 +8,13 @@
             {{ form_row(form.releasedAt, {'label': 'Data de llançament:','attr': {'class': 'form-control','type': 'date', 'value': form.vars.value.releasedAt|date('Y-m-d')}}) }}
         </div>
         <div class="col-2">
-            {{ form_row(form.cover, {'label': 'Portada', 'attr': {'class': 'form-control'}}) }}
-        </div>
-        <div class="col-1">
             {{ form_row(form.band, {'label': 'Banda', 'attr': {'class': 'form-control'}}) }}
         </div>
-        <div class="col-1">
+        <div class="col-2">
             {{ form_row(form.users, {'label': 'Usuaris', 'attr': {'class': 'form-control', 'multiple aria-label': 'example'}}) }}
+        </div>
+        <div class="col-2">
+            {{ form_row(form.cover, {'label': 'Portada', 'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
 </div>
