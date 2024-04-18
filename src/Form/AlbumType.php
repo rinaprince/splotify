@@ -24,11 +24,6 @@ class AlbumType extends AbstractType
                 'class' => Band::class,
                 'choice_label' => 'name',
             ])
-            ->add('users', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'username',
-                'multiple' => true,
-            ])
         ;
     }
 

@@ -47,9 +47,7 @@
                             <td>{{ album.title }}</td>
                             <td>
                                 {% if album.releasedAt %}
-                                    <input type="date" value="{{ album.releasedAt|date('Y-m-d') }}">
-                                {% else %}
-                                    <input type="date" value="">
+                                {{ album.releasedAt|date('Y-m-d') }}
                                 {% endif %}
                             </td>
                             <td>{{ album.cover }}</td>

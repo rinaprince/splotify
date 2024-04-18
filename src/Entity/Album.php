@@ -15,7 +15,6 @@ class Album implements \JsonSerializable
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Assert\Type('integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -23,9 +22,7 @@ class Album implements \JsonSerializable
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\DateTime]
     #[Assert\NotBlank]
-    #[Assert\Type("\DateTimeInterface")]
     #[Assert\NotNull]
     private ?\DateTimeInterface $releasedAt = null;
 
