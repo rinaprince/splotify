@@ -26,6 +26,7 @@ class AlbumType extends AbstractType
             ->add('coverFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => false,
+                'image_uri' => true,
                 'constraints' => [
                     new Assert\NotBlank([
                         'message' => 'Putja una portada.'
