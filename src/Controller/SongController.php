@@ -89,7 +89,7 @@ class SongController extends AbstractController
     #[Route('/{id}/edit', name: 'app_song_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Song $song, EntityManagerInterface $entityManager): Response
     {
-        //$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Només un admin pot entrar.');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Només un admin pot entrar.');
         $form = $this->createForm(SongType::class, $song);
         $form->handleRequest($request);
 
