@@ -71,8 +71,17 @@ class AlbumController extends AbstractController
     public function edit(Request $request, Album $album, EntityManagerInterface $entityManager): Response
     {
 
+        $form = $this->createForm(AlbumType::class, $album);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&&$form->isValid()){
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_album_index', [], Response::HTTP_SEE_OTHER);        }
+
         return $this->render('album/edit.html.twig', [
             'album' => $album,
+            'form' => $form,
         ]);
     }
 

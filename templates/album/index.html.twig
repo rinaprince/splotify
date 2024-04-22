@@ -37,7 +37,7 @@
                         <th>Titol</th>
                         <th>Publicat</th>
                         <th>Cover</th>
-                        <!--<th>accions</th>-->
+                        <th>Accions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,14 +47,21 @@
                             <td>{{ album.title }}</td>
                             <td>
                                 {% if album.releasedAt %}
-                                {{ album.releasedAt|date('Y-m-d') }}
+                                    {{ album.releasedAt|date('Y-m-d') }}
                                 {% endif %}
                             </td>
-                            <td>{{ album.cover }}</td>
-                            <!--<td>
-                    <a href="{{ path('app_album_show', {'id': album.id}) }}">Mostrar</a>
-                    <a href="{{ path('app_album_edit', {'id': album.id}) }}">Editar</a>
-                </td>-->
+                            <td>{{ album.coverFile }}</td>
+                            <td class="d-flex">
+                                <!--<button class="btn btn-success ms-5 me-2"><a
+                                            href="{{ path('app_album_show', {'id': album.id}) }}"
+                                            class="link-underline link-underline-opacity-0"><i
+                                                class="bi bi-eye text-white"></i></a></button>-->
+                                <button class="btn btn-primary me-2"><a
+                                            href="{{ path('app_album_edit', {'id': album.id}) }}"
+                                            class="link-underline link-underline-opacity-0"><i
+                                                class="bi bi-pencil-square text-white"></i></a></button>
+                                {{ include('album/_delete_form.html.twig') }}
+                            </td>
                         </tr>
                     {% else %}
                         <tr>

@@ -8,8 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
+#[Vich\Uploadable]
 class Album implements \JsonSerializable
 {
     #[ORM\Id]
@@ -26,12 +29,15 @@ class Album implements \JsonSerializable
     #[Assert\NotNull]
     private ?\DateTimeInterface $releasedAt = null;
 
-    #[ORM\Column(length: 255)]
+    /*#[ORM\Column(length: 255)]
     #[Assert\Image(
         maxSize: "2M",
     )]
     #[Assert\NotBlank]
-    private ?string $cover = null;
+    private ?string $cover = null;*/
+
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'coverFile', size: 'coverFile')]
+    private ?File $coverFile = null;
 
      #[ORM\ManyToOne(inversedBy: 'albums')]
     private ?Band $band = null;
@@ -84,7 +90,17 @@ class Album implements \JsonSerializable
         return $this;
     }
 
-    public function getCover(): ?string
+    public function getCoverFile(): ?File
+    {
+        return $this->coverFile;
+    }
+
+    public function setCoverFile(?File $coverFile): void
+    {
+        $this->coverFile = $coverFile;
+    }
+
+    /*public function getCover(): ?string
     {
         return $this->cover;
     }
@@ -94,8 +110,7 @@ class Album implements \JsonSerializable
         $this->cover = $cover;
 
         return $this;
-    }
-
+    }*/
 
     public function getBand(): ?Band
     {

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class AlbumType extends AbstractType
 {
@@ -21,7 +22,7 @@ class AlbumType extends AbstractType
             ->add('releasedAt', DateType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('cover')
+            ->add('coverFile', VichFileType::class)
             ->add('band', EntityType::class, [
                 'class' => Band::class,
                 'choice_label' => 'name',
