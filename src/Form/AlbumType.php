@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class AlbumType extends AbstractType
 {
@@ -22,7 +23,20 @@ class AlbumType extends AbstractType
             ->add('releasedAt', DateType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('coverFile', VichFileType::class)
+            ->add('coverFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'Putja una portada.'
+                    ]),
+                    new Assert\Image([
+                        'maxSize' => '2M',
+                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif'],
+                        'mimeTypesMessage' => 'Putja estos formats: jpeg, png, gif.'
+                    ])
+                ]
+            ])
             ->add('band', EntityType::class, [
                 'class' => Band::class,
                 'choice_label' => 'name',

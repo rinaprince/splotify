@@ -30,13 +30,15 @@ class Album implements \JsonSerializable
     private ?\DateTimeInterface $releasedAt = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Image(
-        maxSize: "2M",
-    )]
-    #[Assert\NotBlank]
     private ?string $cover = null;
 
-    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'coverFile', size: 'cover')]
+    #[Vich\UploadableField(mapping: 'albums', fileNameProperty: 'cover', size: 'cover')]
+    #[Assert\Image(
+        maxSize: "2M",
+        mimeTypes: ["image/jpeg", "image/png", "image/gif"],
+        mimeTypesMessage: "Putja estos formats: jpeg, png, gif."
+    )]
+    #[Assert\NotBlank(message: "Please upload a cover image.")]
     private ?File $coverFile = null;
 
      #[ORM\ManyToOne(inversedBy: 'albums')]
@@ -95,9 +97,12 @@ class Album implements \JsonSerializable
         return $this->coverFile;
     }
 
-    public function setCoverFile(?File $coverFile): void
+    public function setCoverFile(?File $coverFile = null): void
     {
         $this->coverFile = $coverFile;
+        if (null !== $coverFile) {
+            $this->releasedAt = new \DateTimeImmutable();
+        }
     }
 
     public function getCover(): ?string
