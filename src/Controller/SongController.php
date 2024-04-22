@@ -71,6 +71,7 @@ class SongController extends AbstractController
         }
 
         return $this->render('song/new.html.twig', [
+            'form' => $form,
             'song' => $song,
         ]);
     }

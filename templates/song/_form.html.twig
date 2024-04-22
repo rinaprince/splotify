@@ -1,4 +1,17 @@
 {{ form_start(form) }}
+<div class="container bg-white">
+    <div class="row">
+        <div class="col-3">
+            {{ form_row(form.title, {'label': 'Titol', 'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.duration, {'label': 'Duració:','attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-3">
+            {{ form_row(form.album, {'label': 'Banda', 'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+</div>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<button class="btn btn-outline-success ms-5 mt-5">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

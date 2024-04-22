@@ -1,11 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Song{% endblock %}
+{% block title %}Crear cançons{% endblock %}
 
 {% block body %}
-    <h1>Create new Song</h1>
+
+    <div class="container d-flex justify-content-center py-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="fs-5 border-3 border-bottom border-info-subtle">Creant una nova cançò</h2>
+            </div>
+        </div>
+    </div>
 
     {{ include('song/_form.html.twig') }}
 
-    <a href="{{ path('app_song_index') }}">back to list</a>
+    <button class="btn btn-danger ms-5 mt-3"><a href="{{ path('app_song_index') }}"
+                                                class="link-underline link-underline-opacity-0 text-white">Torna
+            enrere</a></button>
 {% endblock %}
