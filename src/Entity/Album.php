@@ -29,14 +29,14 @@ class Album implements \JsonSerializable
     #[Assert\NotNull]
     private ?\DateTimeInterface $releasedAt = null;
 
-    /*#[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)]
     #[Assert\Image(
         maxSize: "2M",
     )]
     #[Assert\NotBlank]
-    private ?string $cover = null;*/
+    private ?string $cover = null;
 
-    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'coverFile', size: 'coverFile')]
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'coverFile', size: 'cover')]
     private ?File $coverFile = null;
 
      #[ORM\ManyToOne(inversedBy: 'albums')]
@@ -100,7 +100,7 @@ class Album implements \JsonSerializable
         $this->coverFile = $coverFile;
     }
 
-    /*public function getCover(): ?string
+    public function getCover(): ?string
     {
         return $this->cover;
     }
@@ -110,7 +110,7 @@ class Album implements \JsonSerializable
         $this->cover = $cover;
 
         return $this;
-    }*/
+    }
 
     public function getBand(): ?Band
     {
