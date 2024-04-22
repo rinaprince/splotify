@@ -18,9 +18,20 @@
                 <ol>
                     {% for album in albums %}
                         <p><strong>Titol:</strong><br> {{ album.title }}</p><br>
-                        <p><strong>Portada:</strong><br> <img src="{{ album.cover }}" class="w-50" alt="Portada del àlbum"></p><br>
+                        {% if album.cover starts with 'public/images/album/' %}
+                            <p><strong>Portada:</strong><br> <img src="{{ asset( album.cover) }}"
+                                                                  class="w-50" alt="Portada del àlbum"></p><br>
+                        {% else %}
+                            <p><strong>Portada:</strong><br> <img src="{{ album.cover }}" class="w-50"
+                                                                  alt="Portada del àlbum"></p><br>
+                        {% endif %}
+                        {{ dump(album.cover) }}
+                        {{ dump(asset(album.cover)) }}
+
                         <p><strong>Nº de cançons:</strong><br> {{ album.songs|length }}</p><br>
-                        <button class="btn btn-primary mb-3"><a href="{{ path('album_details', {'id': album.id}) }}" class="link-underline link-underline-opacity-0 text-white">Detalls</a></button>
+                        <button class="btn btn-primary mb-3"><a href="{{ path('album_details', {'id': album.id}) }}"
+                                                                class="link-underline link-underline-opacity-0 text-white">Detalls</a>
+                        </button>
                         {% if album not in app.user.likes %}
                             <form action="{{ path('like_album', {'id': album.id}) }}" method="post">
                                 <button type="submit" class="btn btn-success me-2 mb-3 text-white">Like</button>
