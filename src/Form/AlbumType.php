@@ -24,9 +24,11 @@ class AlbumType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('coverFile', VichFileType::class, [
-                'required' => false,
+//                'required' => false,
                 'allow_delete' => false,
-                'image_uri' => true,
+                'download_uri' => false,
+//                'download_label' => static fn (Album $album): string => $album->getTitle(),
+//                'image_uri' => true,
                 'constraints' => [
                     new Assert\NotBlank([
                         'message' => 'Putja una portada.'
