@@ -32,13 +32,13 @@ class Album implements \JsonSerializable
     #[ORM\Column(length: 255)]
     private ?string $cover = null;
 
-    #[Vich\UploadableField(mapping: 'albums', fileNameProperty: 'cover', size: 'cover')]
+    #[Vich\UploadableField(mapping: 'albums', fileNameProperty: 'cover')]
     #[Assert\Image(
         maxSize: "2M",
         mimeTypes: ["image/jpeg", "image/png", "image/gif"],
         mimeTypesMessage: "Putja estos formats: jpeg, png, gif."
     )]
-    #[Assert\NotBlank(message: "Please upload a cover image.")]
+    #[Assert\NotBlank(message: "Putja una imatge per a la portada.")]
     private ?File $coverFile = null;
 
      #[ORM\ManyToOne(inversedBy: 'albums')]
