@@ -41,6 +41,9 @@ class Album implements \JsonSerializable
     #[Assert\NotBlank(message: "Putja una imatge per a la portada.")]
     private ?File $coverFile = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
      #[ORM\ManyToOne(inversedBy: 'albums')]
     private ?Band $band = null;
 
@@ -101,7 +104,7 @@ class Album implements \JsonSerializable
     {
         $this->coverFile = $coverFile;
         if (null !== $coverFile) {
-            $this->releasedAt = new \DateTimeImmutable();
+            $this->updatedAt = new \DateTimeImmutable();
         }
     }
 
