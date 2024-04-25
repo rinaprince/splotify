@@ -18,14 +18,8 @@
                 <ol>
                     {% for album in albums %}
                         <p><strong>Titol:</strong><br> {{ album.title }}</p><br>
-                        {% if '/images/album/' in album.cover %}
-                            <p><strong>Portada:</strong><br> <img src="{{ asset ( album.cover) }}"
-                                                                  class="w-50" alt="Portada del àlbum"></p><br>
-                        {% else %}
-                            <p><strong>Portada:</strong><br> <img src="{{ album.cover }}" class="w-50"
-                                                                  alt="Portada del àlbum"></p><br>
-                        {% endif %}
-                        {{ dump(asset(album.cover)) }}
+                        <p><strong>Portada:</strong><br> <img src="/images/albums/{{ album.cover }}" class="w-25"
+                                                              alt="Portada del àlbum"></p><br>
 
                         <p><strong>Nº de cançons:</strong><br> {{ album.songs|length }}</p><br>
                         <button class="btn btn-primary mb-3"><a href="{{ path('album_details', {'id': album.id}) }}"

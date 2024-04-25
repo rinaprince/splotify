@@ -24,7 +24,7 @@ class AlbumFixtures extends Fixture implements DependentFixtureInterface
             $album
                 ->setTitle($faker->sentence(3))
                 ->setReleasedAt($faker->dateTimeThisDecade())
-                ->setCover($faker->imageUrl())
+                ->setCover($faker->file('img', 'public/images/albums', false))
             ;
 
             $manager->persist($album);
