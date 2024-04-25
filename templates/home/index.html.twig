@@ -18,8 +18,12 @@
                 <ol>
                     {% for album in albums %}
                         <p><strong>Titol:</strong><br> {{ album.title }}</p><br>
-                        <p><strong>Portada:</strong><br> <img src="/images/albums/{{ album.cover }}" class="w-25"
-                                                              alt="Portada del àlbum"></p><br>
+                       {# <p><strong>Portada:</strong><br> <img src="/images/albums/{{ album.cover }}" class="w-25"
+                                                              alt="Portada del àlbum"></p><br>#}
+
+                        <p><strong>Portada:</strong><br> <img src="{{vich_uploader_asset(album) }}" class="w-25"
+                                                              alt={{ album.title }}></p>
+
 
                         <p><strong>Nº de cançons:</strong><br> {{ album.songs|length }}</p><br>
                         <button class="btn btn-primary mb-3"><a href="{{ path('album_details', {'id': album.id}) }}"
