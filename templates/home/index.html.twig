@@ -21,7 +21,7 @@
                              class="img-fluid"
                              alt={{ album.title }}>
                         <div class="card-body">
-                            <h5 class="card-title">{{ album.title }}</h5>
+                            <h5 class="card-title my-3">{{ album.title }}</h5>
                             <p class="card-text"><a
                                         href="{{ path('app_band_show', {'id': album.band.id}) }}"
                                         class="link-offset-3 link-offset-3-hover link-underline-info link-underline-opacity-0 link-underline-opacity-75-hover text-black">{{ album.band.name }}</a>
@@ -35,7 +35,7 @@
                                     <button type="submit" class="btn btn-success me-2 mb-3 text-white">
                                         Like
                                     </button>
-                                    <p class="mb-3"><strong>Likes: </strong> {{ album.users | length }}
+                                    <p class="mb-3">Likes: {{ album.users | length }}
                                     </p>
                                 </form>
                             {% endif %}
