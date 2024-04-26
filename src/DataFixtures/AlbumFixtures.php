@@ -3,12 +3,14 @@
 namespace App\DataFixtures;
 
 use App\Entity\Album;
+use App\Entity\Band;
 use App\Entity\Song;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use LogicException;
 
 class AlbumFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -18,6 +20,12 @@ class AlbumFixtures extends Fixture implements DependentFixtureInterface
 
         $faker = Factory::create();
 
+        //Obtindre les bandes ja creades
+        $bands = $manager->getRepository(Band::class)->findAll();
+        if (empty($bands)) {
+            throw new LogicException("Ningunda banda disponible.");
+        }
+
         //Generar àlbums
         for ($i = 0; $i <25; $i++) {
             $album = new Album();
@@ -25,6 +33,7 @@ class AlbumFixtures extends Fixture implements DependentFixtureInterface
                 ->setTitle($faker->sentence(3))
                 ->setReleasedAt($faker->dateTimeThisDecade())
                 ->setCover($faker->file('img', 'public/images/albums', false))
+                ->setBand($faker->randomElement($bands))
             ;
 
             $manager->persist($album);
@@ -73,6 +82,9 @@ class AlbumFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class];
+        return [
+            UserFixtures::class,
+            BandFixtures::class
+            ];
     }
 }

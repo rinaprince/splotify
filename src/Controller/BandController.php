@@ -45,6 +45,9 @@ class BandController extends AbstractController
     #[Route('/{id}', name: 'app_band_show', methods: ['GET'])]
     public function show(Band $band): Response
     {
+
+        // $band = $this->entityManager->getRepository(Band::class)->find($id);
+
         return $this->render('band/show.html.twig', [
             'band' => $band,
         ]);
@@ -68,7 +71,7 @@ class BandController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_band_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_band_delete', methods: ['POST'])]
     public function delete(Request $request, Band $band, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$band->getId(), $request->getPayload()->get('_token'))) {

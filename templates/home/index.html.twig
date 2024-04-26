@@ -24,6 +24,8 @@
                         <p><strong>Portada:</strong><br> <img src="{{vich_uploader_asset(album, 'coverFile') }}" class="w-25"
                                                               alt={{ album.title }}></p>
 
+{#                        <a href="{{ path('band_show', {'id': album.band.id}) }}"></a>#}
+                        {{ dump(album.band.name) }}
 
                         <p><strong>Nº de cançons:</strong><br> {{ album.songs|length }}</p><br>
                         <button class="btn btn-primary mb-3"><a href="{{ path('album_details', {'id': album.id}) }}"
