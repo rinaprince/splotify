@@ -16,6 +16,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_song_index') }}">Cançons</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_band_index') }}">Bandes</a>
+                </li>
                 {% if app.user %}
                     <li class="mt-2 ms-2 text-danger-emphasis"><i class="bi bi-person me-1"></i>{{ app.user.username }}</li>
                 {% endif %}
