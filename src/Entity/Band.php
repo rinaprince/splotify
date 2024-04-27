@@ -7,8 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: BandRepository::class)]
+#[Vich\Uploadable]
 class Band
 {
     #[ORM\Id]
@@ -21,6 +25,21 @@ class Band
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $bio = null;
+
+    #[Vich\UploadableField(mapping: 'bands', fileNameProperty: 'photo')]
+    #[Assert\Image(
+        maxSize: "2M",
+        mimeTypes: ["image/jpeg", "image/png", "image/gif"],
+        mimeTypesMessage: "Putja estos formats: jpeg, png, gif."
+    )]
+    #[Assert\NotBlank(message: "Putja una imatge per a la portada.")]
+    private ?File $photoFile = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $photo = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(targetEntity: Album::class, mappedBy: 'band')]
     private Collection $albums;
