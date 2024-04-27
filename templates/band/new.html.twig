@@ -1,11 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Band{% endblock %}
+{% block title %}Creant Bandes{% endblock %}
 
 {% block body %}
-    <h1>Create new Band</h1>
+
+    <div class="container d-flex justify-content-center py-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="fs-5 border-3 border-bottom border-info-subtle">Creant una banda</h2>
+            </div>
+        </div>
+    </div>
 
     {{ include('band/_form.html.twig') }}
 
-    <a href="{{ path('app_band_index') }}">back to list</a>
+    <button class="btn btn-danger ms-5 mt-3"><a href="{{ path('app_band_index') }}"
+                                                class="link-underline link-underline-opacity-0 text-white">Tornar
+            enrere</a></button>
 {% endblock %}
