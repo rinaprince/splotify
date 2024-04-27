@@ -85,6 +85,40 @@ class Band
         return $this;
     }
 
+    public function getPhotoFile(): ?File
+    {
+        return $this->photoFile;
+    }
+
+    public function setPhotoFile(?File $photoFile = null): void
+    {
+        $this->photoFile = $photoFile;
+
+        if(null !== $photoFile){
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): void
+    {
+        $this->photo = $photo;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
     /**
      * @return Collection<int, Album>
      */
