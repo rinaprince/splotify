@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <h5 class="card-title my-3">{{ album.title }}</h5>
                             <p class="card-text"><a
-                                        href="{{ path('app_band_show', {'id': album.band.id}) }}"
+                                        href="{{ path('band_details', {'id': album.band.id}) }}"
                                         class="link-offset-3 link-offset-3-hover link-underline-info link-underline-opacity-0 link-underline-opacity-75-hover text-black">{{ album.band.name }}</a>
                             </p>
                             <button class="btn btn-primary mb-3"><a

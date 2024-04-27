@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Album;
+use App\Entity\Band;
 use App\Repository\AlbumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +31,15 @@ class HomeController extends AbstractController
 
         return $this->render('album/show.html.twig', [
             'album' => $album,
+        ]);
+    }
+
+    #[Route('/band/{id}', name: 'band_details')]
+    public function show2(Band $band): Response
+    {
+
+        return $this->render('band/show.html.twig', [
+            'band' => $band,
         ]);
     }
 }
