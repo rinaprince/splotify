@@ -17,7 +17,8 @@ class BandFixtures extends Fixture
             $band = new Band();
             $band
                 ->setName($faker->unique()->sentence(2))
-                ->setBio($faker->paragraph());
+                ->setBio($faker->paragraph())
+                ->setPhoto($faker->file('img2', 'public/images/bands', false));
 
             $manager->persist($band);
         }
