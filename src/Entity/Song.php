@@ -19,11 +19,17 @@ class Song implements \JsonSerializable
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 3,
+        max: 150,
+        minMessage: "La cançó ha de tindre més de 3 lletres",
+        maxMessage: "La cançó no pot tindre més de 150 lletres."
+    )]
     private ?string $title = null;
 
     #[ORM\Column]
     #[Assert\Range(
-        notInRangeMessage: 'Duration must be between {{ min }} and {{ max }}',
+        notInRangeMessage: "La duració ha d'estar entre 20 i 600 min.",
         min: 20,
         max: 600,
     )]

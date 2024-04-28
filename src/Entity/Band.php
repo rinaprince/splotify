@@ -20,9 +20,21 @@ class Band
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 3,
+        max: 80,
+        minMessage: "La banda ha de tindre més de 3 lletres",
+        maxMessage: "La banda no pot tindre més de 80 lletres."
+    )]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Assert\Length(
+        min: 5,
+        max: 200,
+        minMessage: "La biografia ha de tindre més de 5 lletres",
+        maxMessage: "La biografia no pot tindre més de 200 lletres."
+    )]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $bio = null;
 

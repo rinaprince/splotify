@@ -22,6 +22,12 @@ class Album implements \JsonSerializable
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 3,
+        max: 80,
+        minMessage: "L'àlbum ha de tindre més de 3 lletres",
+        maxMessage: "L'àlbum no pot tindre més de 80 lletres."
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
