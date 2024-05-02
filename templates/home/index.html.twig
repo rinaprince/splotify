@@ -21,7 +21,7 @@
                              class="img-fluid rounded-top"
                              alt={{ album.title }}>
                         <div class="card-body">
-                            <h5 class="card-title text-primary-emphasis my-3">{{ album.title }}</h5>
+                            <h5 class="card-title text-primary-emphasis my-3 fs-6">{{ album.title }}</h5>
                             <p>Nº Cançons: {{ album.songs|length }}</p>
                             <p class="card-text">Banda: <a
                                         href="{{ path('band_details', {'id': album.band.id}) }}"
@@ -36,10 +36,10 @@
                                     <button type="submit" class="btn btn-success me-2 mb-3 text-white">
                                         Like
                                     </button>
-                                    <p class="mb-3">Likes: {{ album.users | length }}
-                                    </p>
                                 </form>
                             {% endif %}
+                            <p class="mb-3">Likes: {{ album.users | length }}
+                            </p>
                         </div>
                     </div>
                 </div>
