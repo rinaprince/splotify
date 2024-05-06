@@ -11,21 +11,57 @@ import { Controller } from '@hotwired/stimulus';
  */
 export default class extends Controller {
     connect() {
-        //this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
+        console.log('Stimulus connected');
     }
-
-    static targets = ["button"]
 
     like(event) {
         event.preventDefault();
-        alert('Has fet like');
-        this.toggleButton(true);
+        const url = this.element.querySelector('a').getAttribute('href');
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.toggleButton(true);
+                    alert('Has fet like');
+                } else {
+                    alert('Error al donar like');
+                }
+            })
+            .catch(error => {
+                console.error('Error al donar like:', error);
+                alert('Error al processar la solicitud');
+            });
     }
 
     dislike(event) {
         event.preventDefault();
-        alert('Has fet dislike');
-        this.toggleButton(false);
+        const url = this.element.querySelector('a').getAttribute('href');
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.toggleButton(false);
+                    alert('Has donat dislike');
+                } else {
+                    alert('Error al donar dislike');
+                }
+            })
+            .catch(error => {
+                console.error('Error al donar dislike:', error);
+                alert('Error al processar la solicitud');
+            });
     }
 
     toggleButton(liked) {
@@ -36,11 +72,11 @@ export default class extends Controller {
         if (liked) {
             button.classList.add('btn-danger');
             button.innerHTML = '<i class="bi bi-star-half"></i>';
-            button.dataset.action = 'hello#dislike';
+            button.dataset.action = 'click->hello#dislike';
         } else {
             button.classList.add('btn-warning');
             button.innerHTML = '<i class="bi bi-star"></i>';
-            button.dataset.action = 'hello#like';
+            button.dataset.action = 'click->hello#like';
         }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Album;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -26,13 +27,13 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/like/{id}', name: 'like_album')]
-    public function like(int $id, Request $request): Response
+    #[Route('/like/{id}', name: 'like_album', methods: ['POST'])]
+    public function like(int $id, Request $request): JsonResponse
     {
         $album = $this->entityManager->getRepository(Album::class)->find($id);
 
         if (!$album) {
-            throw $this->createNotFoundException("No s'ha trobat àlbum amb:" . $id);
+            return new JsonResponse(['success' => false, 'message' => "Album no trobat amb l'id: $id"]);
         }
 
         $user = $this->getUser();
@@ -42,16 +43,16 @@ class UserController extends AbstractController
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        return $this->redirectToRoute('app_home');
+        return new JsonResponse(['success' => true, 'message' => "S'ha fet like"]);
     }
 
-    #[Route('/dislike/{id}', name: 'dislike_album')]
-    public function dislike(int $id, Request $request): Response
+    #[Route('/dislike/{id}', name: 'dislike_album', methods: ['POST'])]
+    public function dislike(int $id, Request $request): JsonResponse
     {
         $album = $this->entityManager->getRepository(Album::class)->find($id);
 
         if (!$album) {
-            throw $this->createNotFoundException("No s'ha trobat àlbum amb:" . $id);
+            return new JsonResponse(['success' => false, 'message' => "Album no trobat amb l'id: $id"]);
         }
 
         $user = $this->getUser();
@@ -62,6 +63,6 @@ class UserController extends AbstractController
             $this->entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_home');
+        return new JsonResponse(['success' => true, 'message' => "S'ha fet dislike"]);
     }
 }
