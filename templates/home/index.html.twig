@@ -32,15 +32,15 @@
                                             href="{{ path('album_details', {'id': album.id}) }}"
                                             class="link-underline link-underline-opacity-0 text-white">Detalls</a>
                                 </button>
-                                <div {#data-controller="hello"#}>
+                                <div data-controller="hello">
                                     {% if album not in app.user.likes %}
-                                        <button type="submit" class="btn btn-warning me-2 mb-3 text-white" {#data-action="click->hello#like"#}>
+                                        <button type="submit" class="btn btn-warning me-2 mb-3 text-white" data-action="click->hello#like">
                                             <a href="{{ path('like_album', {'id': album.id}) }}"
                                                class="link-underline link-underline-opacity-0 text-white">
                                                 <i class="bi bi-star"></i></a>
                                         </button>
                                     {% else %}
-                                        <button type="submit" class="btn btn-danger me-2 mb-3 text-white" {#data-action="click->hello#dislike"#}>
+                                        <button type="submit" class="btn btn-danger me-2 mb-3 text-white" data-action="click->hello#dislike">
                                             <a href="{{ path('dislike_album', {'id': album.id}) }}"
                                                class="link-underline link-underline-opacity-0 text-white">
                                                 <i class="bi bi-star-half"></i></a>
