@@ -38,9 +38,14 @@
                                            class="link-underline link-underline-opacity-0 text-white">
                                             <i class="bi bi-star"></i></a>
                                     </button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-danger me-2 mb-3 text-white">
+                                            <a class="link-underline link-underline-opacity-0 text-white">
+                                                <i class="bi bi-star-half"></i></a>
+                                        </button>
                                 {% endif %}
                             </div>
-                                <p class="mb-3 me-1 d-flex justify-content-end">Likes: {{ album.users | length }}
+                                <p class="mb-3 me-1 mt-3 d-flex justify-content-end">Likes: {{ album.users | length }}
                                 </p>
                         </div>
                     </div>
