@@ -27,19 +27,21 @@
                                         href="{{ path('band_details', {'id': album.band.id}) }}"
                                         class="link-offset-3 link-offset-3-hover link-underline-info link-underline-opacity-0 link-underline-opacity-75-hover text-black">{{ album.band.name }}</a>
                             </p>
-                            <button class="btn btn-primary mb-3"><a
-                                        href="{{ path('album_details', {'id': album.id}) }}"
-                                        class="link-underline link-underline-opacity-0 text-white">Detalls</a>
-                            </button>
-                            {% if album not in app.user.likes %}
-                                <form action="{{ path('like_album', {'id': album.id}) }}" method="post">
-                                    <button type="submit" class="btn btn-success me-2 mb-3 text-white">
-                                        Like
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <button class="btn btn-primary mb-3"><a
+                                            href="{{ path('album_details', {'id': album.id}) }}"
+                                            class="link-underline link-underline-opacity-0 text-white">Detalls</a>
+                                </button>
+                                {% if album not in app.user.likes %}
+                                    <button type="submit" class="btn btn-warning me-2 mb-3 text-white">
+                                        <a href="{{ path('like_album', {'id': album.id}) }}"
+                                           class="link-underline link-underline-opacity-0 text-white">
+                                            <i class="bi bi-star"></i></a>
                                     </button>
-                                </form>
-                            {% endif %}
-                            <p class="mb-3">Likes: {{ album.users | length }}
-                            </p>
+                                {% endif %}
+                            </div>
+                                <p class="mb-3 me-1 d-flex justify-content-end">Likes: {{ album.users | length }}
+                                </p>
                         </div>
                     </div>
                 </div>
