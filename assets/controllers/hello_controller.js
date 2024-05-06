@@ -13,7 +13,34 @@ export default class extends Controller {
     connect() {
         //this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
     }
-    like() {
+
+    static targets = ["button"]
+
+    like(event) {
+        event.preventDefault();
         alert('Has fet like');
+        this.toggleButton(true);
+    }
+
+    dislike(event) {
+        event.preventDefault();
+        alert('Has fet dislike');
+        this.toggleButton(false);
+    }
+
+    toggleButton(liked) {
+        const button = this.element.querySelector('button');
+        button.classList.remove('btn-warning', 'btn-danger');
+        button.innerHTML = '';
+
+        if (liked) {
+            button.classList.add('btn-danger');
+            button.innerHTML = '<i class="bi bi-star-half"></i>';
+            button.dataset.action = 'hello#dislike';
+        } else {
+            button.classList.add('btn-warning');
+            button.innerHTML = '<i class="bi bi-star"></i>';
+            button.dataset.action = 'hello#like';
+        }
     }
 }

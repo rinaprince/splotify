@@ -44,4 +44,24 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
+
+    #[Route('/dislike/{id}', name: 'dislike_album')]
+    public function dislike(int $id, Request $request): Response
+    {
+        $album = $this->entityManager->getRepository(Album::class)->find($id);
+
+        if (!$album) {
+            throw $this->createNotFoundException("No s'ha trobat àlbum amb:" . $id);
+        }
+
+        $user = $this->getUser();
+
+        if ($user->getLikes()->contains($album)) {
+            $user->removeLike($album);
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_home');
+    }
 }
