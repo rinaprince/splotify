@@ -17,7 +17,13 @@
             {% for album in albums %}
                 <div class="col-3 mb-5">
                     <div class="card h-100 shadow rounded-top">
-                        <img src="{{ vich_uploader_asset(album, 'coverFile') }}"
+                        {#<img src="{{ vich_uploader_asset(album, 'coverFile') }}"
+                             class="img-fluid rounded-top"
+                             alt={{ album.title }}>#}
+                        <img src="{{ asset("/images/albums/" ~ album.cover) | imagine_filter('album_lowres') }}"
+                                {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
+                                    src: asset("/images/albums/" ~ album.cover) | imagine_filter('album_thumb')
+                                }) }}
                              class="img-fluid rounded-top"
                              alt={{ album.title }}>
                         <div class="card-body">
