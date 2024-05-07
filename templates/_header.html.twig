@@ -1,28 +1,24 @@
 <nav class="navbar navbar-expand-lg bg-primary-subtle shadow">
     <div class="container-fluid">
-        <h1 class="fs-3">Splotify</h1>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <h1 class="fs-3 text-info-emphasis">Splotify</h1>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ path('app_home') }}">Pàgina principal</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}"  href="{{ path('app_home') }}">Pàgina principal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_album_index') }}">Àlbums</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_album_index' ? 'active' : '' }}" href="{{ path('app_album_index') }}">Àlbums</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_song_index') }}">Cançons</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_song_index' ? 'active' : '' }}" href="{{ path('app_song_index') }}">Cançons</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_band_index') }}">Bandes</a>
+                    <a class="nav-link {{ app.request.attributes.get('_route') == 'app_band_index' ? 'active' : '' }}" href="{{ path('app_band_index') }}">Bandes</a>
                 </li>
-                {% if app.user %}
-                    <li class="mt-2 ms-2 text-danger-emphasis"><i class="bi bi-person me-1"></i>{{ app.user.username }}</li>
-                {% endif %}
             </ul>
         </div>
+        {% if app.user %}
+            <div class="mt-2 ms-2 text-primary"><i class="bi bi-person me-1"></i>{{ app.user.username }}</div>
+        {% endif %}
     </div>
 </nav>
