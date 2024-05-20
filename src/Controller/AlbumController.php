@@ -58,7 +58,6 @@ class AlbumController extends AbstractController
     #[Route('/{id}', name: 'app_album_show', methods: ['GET'])]
     public function show(Album $album): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Només un user normal pot entrar.');
 
         return $this->render('album/show.html.twig', [
             'album' => $album,

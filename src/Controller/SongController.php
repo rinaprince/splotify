@@ -27,7 +27,6 @@ class SongController extends AbstractController
     #[Route('/', name: 'app_song_index', methods: ['GET'])]
     public function index(Request $request, PaginatorInterface $paginator, SongRepository $songRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Només un admin pot entrar.');
 
         // Accedir a tots els àlbums (necessita propietat i constructor per accedir al entityManager)
         $albums = $this->entityManager->getRepository(Album::class)->findAll();
@@ -57,7 +56,6 @@ class SongController extends AbstractController
     #[Route('/new', name: 'app_song_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Només un admin pot entrar.');
 
         $song = new Song();
         $form = $this->createForm(SongType::class, $song);
@@ -79,7 +77,6 @@ class SongController extends AbstractController
     #[Route('/{id}', name: 'app_song_show', methods: ['GET'])]
     public function show(Song $song): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Només un admin pot entrar.');
 
         return $this->render('song/show.html.twig', [
             'song' => $song,
@@ -89,7 +86,6 @@ class SongController extends AbstractController
     #[Route('/{id}/edit', name: 'app_song_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Song $song, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Només un admin pot entrar.');
         $form = $this->createForm(SongType::class, $song);
         $form->handleRequest($request);
 
@@ -108,7 +104,6 @@ class SongController extends AbstractController
     #[Route('/{id}/delete', name: 'app_song_delete', methods: ['POST'])]
     public function delete(Request $request, Song $song, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Només un admin pot entrar.');
 
         if ($this->isCsrfTokenValid('delete'.$song->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($song);
