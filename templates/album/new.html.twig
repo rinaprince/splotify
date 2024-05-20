@@ -14,17 +14,4 @@
 
     {{ include('album/_form.html.twig') }}
 
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-12">
-                <div class="d-flex justify-content-between">
-                    <button class="btn btn-danger"><a href="{{ path('app_album_index') }}"
-                                                                class="link-underline link-underline-opacity-0 text-white">Torna
-                            enrere</a></button>
-
-                    <button class="btn btn-outline-success">{{ button_label|default('Guardar') }}</button>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
