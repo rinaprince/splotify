@@ -21,7 +21,6 @@ class Album implements \JsonSerializable
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
     #[Assert\Length(
         min: 3,
         max: 80,
@@ -39,12 +38,6 @@ class Album implements \JsonSerializable
     private ?string $cover = null;
 
     #[Vich\UploadableField(mapping: 'albums', fileNameProperty: 'cover')]
-    #[Assert\Image(
-        maxSize: "2M",
-        mimeTypes: ["image/jpeg", "image/png", "image/gif"],
-        mimeTypesMessage: "Putja estos formats: jpeg, png, gif."
-    )]
-    #[Assert\NotBlank(message: "Putja una imatge per a la portada.")]
     private ?File $coverFile = null;
 
     #[ORM\Column(nullable: true)]

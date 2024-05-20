@@ -19,7 +19,18 @@ class AlbumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class)
+            ->add('title', TextType::class, [
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'Escriu un títol.'
+                    ]),
+
+                    new Assert\Length([
+                        'max' => 10,
+                        'maxMessage' => "Has passat les 10 paraules."
+                    ])
+                ]
+            ])
             ->add('releasedAt', DateType::class, [
                 'widget' => 'single_text',
             ])
@@ -31,7 +42,7 @@ class AlbumType extends AbstractType
 //                'image_uri' => true,
                 'constraints' => [
                     new Assert\NotBlank([
-                        'message' => 'Putja una portada.'
+                        'message' => 'Puja una portada.'
                     ]),
                     new Assert\Image([
                         'maxSize' => '2M',
@@ -43,8 +54,7 @@ class AlbumType extends AbstractType
             ->add('band', EntityType::class, [
                 'class' => Band::class,
                 'choice_label' => 'name',
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
