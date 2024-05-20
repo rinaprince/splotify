@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Album;
 use App\Entity\Band;
-use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -26,8 +25,8 @@ class AlbumType extends AbstractType
                     ]),
 
                     new Assert\Length([
-                        'max' => 10,
-                        'maxMessage' => "Has passat les 10 paraules."
+                        'max' => 25,
+                        'maxMessage' => "Has passat les 25 lletres."
                     ])
                 ]
             ])
@@ -35,7 +34,7 @@ class AlbumType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('coverFile', VichFileType::class, [
-//                'required' => false,
+//              'required' => false,
                 'allow_delete' => false,
                 'download_uri' => false,
 //                'download_label' => static fn (Album $album): string => $album->getTitle(),
@@ -47,7 +46,7 @@ class AlbumType extends AbstractType
                     new Assert\Image([
                         'maxSize' => '2M',
                         'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif'],
-                        'mimeTypesMessage' => 'Putja estos formats: jpeg, png, gif.'
+                        'mimeTypesMessage' => 'Puja estos formats: jpeg, png, gif.'
                     ])
                 ]
             ])

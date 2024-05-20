@@ -27,14 +27,12 @@ class AlbumFixtures extends Fixture implements DependentFixtureInterface
         }
 
         //Generar àlbums
-        for ($i = 0; $i <25; $i++) {
+        for ($i = 0; $i < 25; $i++) {
             $album = new Album();
-            $album
-                ->setTitle($faker->sentence(3))
-                ->setReleasedAt($faker->dateTimeThisDecade())
-                ->setCover($faker->file('img', 'public/images/albums', false))
-                ->setBand($faker->randomElement($bands))
-            ;
+            $album->setTitle($faker->sentence(3));
+            $album->setReleasedAt($faker->dateTimeThisDecade());
+            $album->setCover($faker->file('img', 'public/images/albums', false));
+            $album->setBand($faker->randomElement($bands));
 
             $manager->persist($album);
             $this->addReference('album_' . ($i + 1), $album);
@@ -43,10 +41,10 @@ class AlbumFixtures extends Fixture implements DependentFixtureInterface
             $numSongs = rand(5, 15);
             for ($j = 0; $j < $numSongs; $j++) {
                 $song = new Song();
-                $song
-                    ->setTitle($faker->unique()->sentence(3))
-                    ->setDuration(rand(120, 600))
-                    ->setAlbum($album);
+
+                $song->setTitle($faker->unique()->sentence(3));
+                $song->setDuration(rand(120, 600));
+                $song->setAlbum($album);
 
                 $manager->persist($song);
             }
@@ -54,7 +52,7 @@ class AlbumFixtures extends Fixture implements DependentFixtureInterface
             $albums[] = $album;
         }
 
-       // $manager->flush();
+        // $manager->flush();
 
         // Asignar àlbums a users
         //$admin = $manager->getRepository(User::class)->findOneBy(['username' => 'admin']);
@@ -85,6 +83,6 @@ class AlbumFixtures extends Fixture implements DependentFixtureInterface
         return [
             UserFixtures::class,
             BandFixtures::class
-            ];
+        ];
     }
 }

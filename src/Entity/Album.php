@@ -34,7 +34,7 @@ class Album implements \JsonSerializable
     #[Assert\NotNull]
     private ?\DateTimeInterface $releasedAt = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $cover = null;
 
     #[Vich\UploadableField(mapping: 'albums', fileNameProperty: 'cover')]
@@ -43,7 +43,7 @@ class Album implements \JsonSerializable
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-     #[ORM\ManyToOne(inversedBy: 'albums')]
+    #[ORM\ManyToOne(inversedBy: 'albums')]
     private ?Band $band = null;
 
     #[ORM\OneToMany(targetEntity: Song::class, mappedBy: 'album')]
@@ -112,7 +112,7 @@ class Album implements \JsonSerializable
         return $this->cover;
     }
 
-    public function setCover(string $cover): static
+    public function setCover(?string $cover): static
     {
         $this->cover = $cover;
 
