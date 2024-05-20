@@ -54,6 +54,8 @@ class AlbumType extends AbstractType
             ->add('band', EntityType::class, [
                 'class' => Band::class,
                 'choice_label' => 'name',
+                'placeholder' => 'Tria una banda',
+                'autocomplete' => true,
             ]);
     }
 
