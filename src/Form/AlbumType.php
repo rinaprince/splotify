@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Validator\Constraints as Assert;
+use function Sodium\add;
 
 class AlbumType extends AbstractType
 {
@@ -50,12 +51,14 @@ class AlbumType extends AbstractType
                     ])
                 ]
             ])
-            ->add('band', EntityType::class, [
+            /*->add('band', EntityType::class, [
                 'class' => Band::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Tria una banda',
                 'autocomplete' => true,
-            ]);
+            ])*/
+        ->add('band', AlbumAutocompleteField::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

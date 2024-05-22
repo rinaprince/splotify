@@ -81,4 +81,14 @@ class BandController extends AbstractController
 
         return $this->redirectToRoute('app_band_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /*#[Route('/band', name: 'ux_app_band', methods: ['GET', 'POST'])]
+    public function autocomplete(Request $request, Band $band, EntityManagerInterface $entityManager): Response
+    {
+
+
+        return $this->render('band/edit.html.twig', [
+            'band' => $band,
+        ]);
+    }*/
 }
