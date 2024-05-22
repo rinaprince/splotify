@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Album;
 use App\Entity\Song;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -22,7 +24,11 @@ class SongType extends AbstractType
                 'class' => Album::class,
                 'choice_label' => 'title',
                 'placeholder' => 'Tria un album',
-                'autocomplete' => true
+                'autocomplete' => true,
+                'query_builder' => function (EntityRepository $entityRepository) :QueryBuilder {
+                    return $entityRepository->createQueryBuilder('a')
+                        ->orderBy('a.title', 'DESC');
+                }
             ])
         ;
     }
