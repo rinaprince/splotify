@@ -21,6 +21,8 @@ class SongType extends AbstractType
             ->add('album', EntityType::class, [
                 'class' => Album::class,
                 'choice_label' => 'title',
+                'placeholder' => 'Tria un album',
+                'autocomplete' => true
             ])
         ;
     }
