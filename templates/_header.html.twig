@@ -18,7 +18,10 @@
             </ul>
         </div>
         {% if app.user %}
-            <div class="mt-2 ms-2 text-primary"><i class="bi bi-person me-1"></i>{{ app.user.username }}</div>
+            <div class="d-flex align-items-center">
+                <div class="text-primary"><i class="bi bi-person me-1"></i>{{ app.user.username }}</div>
+                <a class="link-dark ms-3" href="{{ path('app_logout') }}">Logout</a>
+            </div>
         {% endif %}
     </div>
 </nav>

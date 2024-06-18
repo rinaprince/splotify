@@ -20,10 +20,10 @@
 
                 <form action="{{ path('app_login') }}" method="post">
                     <label for="username" class="mb-4"><strong>Nom d'usuari:</strong></label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}"><br>
+                    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}"><br>
 
                     <label for="password" class="mb-4"><strong>Contrassenya:</strong></label>
-                    <input type="password" id="password" name="_password"> <br>
+                    <input class="form-control" type="password" id="password" name="_password"> <br>
 
                     <button type="submit" class="btn btn-outline-info">Entrar</button>
                 </form>
